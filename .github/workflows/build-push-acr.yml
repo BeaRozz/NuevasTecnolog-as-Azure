@@ -26,8 +26,8 @@ jobs:
 
       - name: Construir y etiquetar la imagen Docker
         run: |
-          # Construimos la imagen con la etiqueta "latest" y una con el ID del commit
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          # Cambiamos el "." del final por "./mi-app-react"
+          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ./mi-app-react
 
       - name: Subir la imagen a Azure Container Registry
         run: |
