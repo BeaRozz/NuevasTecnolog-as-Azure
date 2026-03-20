@@ -1,0 +1,25 @@
+name: Despliegue a Azure Static Web App
+
+on:
+  push:
+    branches:
+      - main # Cambia esto a 'master' si esa es tu rama principal
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Construir y Desplegar
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Proporcionado automáticamente por GitHub
+          action: "upload"
+          app_location: "/mi-app-react" # Ruta donde está el código fuente de tu app
+          api_location: "" # Se deja vacío porque no tenemos backend serverless aquí
+          output_location: "dist" # Carpeta donde Vite deja la app compilada
